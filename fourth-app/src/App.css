@@ -1,0 +1,19 @@
+h2{
+    position: relative;
+}
+
+h2::after{
+    content: "";
+    height:3px;
+    width:0%;
+    background-color: red;
+    position: absolute;
+    bottom: -2.5px;
+    left: 0px;
+    transition: all ease 0.3s;
+}
+
+h2:hover::after{
+    width: 100%;
+    color: rgb(255,69,0);
+}

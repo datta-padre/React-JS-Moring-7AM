@@ -1,0 +1,19 @@
+button{
+  position: relative;
+}
+
+button::after{
+  content: "";
+  height: 100%;
+  width: 0%;
+  background-color: red;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  z-index: -1;
+  transition: all ease 0.3s;
+}
+
+button:hover::after{
+  width: 100%;
+}
