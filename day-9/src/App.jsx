@@ -29,7 +29,6 @@ function App(){
     <button onClick={submit}>Submit</button>
     <br /><br />
 
-    <p></p>
     </>
   )
 }
