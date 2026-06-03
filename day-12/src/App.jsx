@@ -41,6 +41,15 @@ function App(){
 
   }
 
+  function removeData(index){
+
+    var newArray = [...data];
+    newArray.splice(index,1);
+
+    setData(newArray)
+
+  }
+
   return(
     <>
     <h1>Welcome</h1>
@@ -82,7 +91,7 @@ function App(){
           <td>{item.qty}</td>
           <td>{item.total}</td>
           <td>
-            <button>X</button>
+            <button onClick={()=>removeData(index)}>X</button>
           </td>
         </tr>
         </>
@@ -101,3 +110,12 @@ function App(){
 }
 
 export default App;
+
+
+
+
+// useState 
+// useEffect
+
+// useRef
+//preventDefault
