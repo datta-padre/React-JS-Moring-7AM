@@ -1,66 +1,41 @@
-import axios from "axios"  // npm i axios 
-import { useEffect, useState } from "react"
+import axios from "axios";
+import { useEffect, useState } from "react";
 
 function App() {
 
-  const [pincode , setPincode ] = useState()
-  const [apidata, setApidata ]  = useState([]);
+  const [data , setData] = useState()
+  const [weather, setWeather] = useState(null);
 
-  function search_pincode(){
+  function Search(){
 
-    axios.get("https://api.postalpincode.in/pincode/"+pincode).then((response)=>{
-
-      console.log(response.data[0].PostOffice)
-      setApidata(response.data[0].PostOffice)
-
-    })
+     axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${data}&appid=1e14db34f5674c0591e7aa87328418c5&units=metric`).then((response) => {
+        console.log(response.data);
+        setWeather(response.data);
+      })
 
   }
 
   return (
     <>
-     <input type="number"  onChange={(e)=>setPincode(e.target.value)}/>
-     <br /><br />
-     <button  onClick={search_pincode}>Search Pincode</button>
+      <h1>Check Weather</h1>
 
-     <br /><br />
+      <input type="text" onChange={(e)=>setData(e.target.value)} /> 
 
-     <table width="100%" border={1}>
-      <tr>
-        <th>Name</th>
-        <th>Description</th>
-        <th>BranchType</th>
-        <th>DeliveryStatus</th>
-        <th>Circle</th>
-        <th>District</th>
-        <th>Division</th>
-        <th>Region</th>
-        <th> Block</th>
-        <th> State</th>
-        <th>Country</th>
-      </tr>
+      <br /><br />
 
-    {apidata.map((val,i)=>(
+      <button onClick={Search}>Search</button>
 
-      <tr>
-         <td>{val.Name}</td>
-        <td>{val.Description}</td>
-        <td>{val.BranchType}</td>
-        <td>Delivery</td>
-        <td>Maharashtra</td>
-        <td>Ahmed Nagar</td>
-        <td>Ahmednagar</td>
-        <td>Ahmednagar</td>
-        <td>Ahmednagar</td>
-        <td>Ahmednagar</td>
-        <td>Ahmednagar</td>
-      </tr>
-
-    ))}
-
-     </table>
+      {weather && (
+        <>
+          <h2>City: {weather.name}</h2>
+          <h3>Temperature: {weather.main.temp}°C </h3>
+          <h3>Humidity: {weather.main.humidity}%</h3>
+          <h3>Weather: {weather.weather[0].main}</h3>
+          <img src={`https://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`} alt="Weather Icon"/>
+        </>
+      )}
     </>
-  )
+  );
 }
 
-export default App
+export default App;
